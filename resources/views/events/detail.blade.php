@@ -67,6 +67,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $ticket->name }}</h5>
                             <p class="card-text">{{ $ticket->cost}}-</p>
+                            
                             @php
                                 $value = json_decode($ticket->special_validity);
                             @endphp
