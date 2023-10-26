@@ -74,12 +74,10 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        // $ticket = Event_ticket::where('event_id', $event->id)->get();
-        // $channel = Channel::where('event_id', $event->id)->get();
+        $event_tickets = Event_ticket::where('event_id', $event->id)->get();
 
-        // 
 
-        return view('events.detail', compact('event', 'ticket'));
+        return view('events.detail', compact('event', 'event_tickets'));
     }
 
     /**
@@ -123,7 +121,9 @@ class EventController extends Controller
                 'date' => $request->date,
             ]);
 
-        var_dump($updatingEvent);
+
+
+            
         return redirect()->action([EventController::class, 'show'], ['event' => $event])
             ->with('success', 'Cập nhật sự kiện thành công.');
     }

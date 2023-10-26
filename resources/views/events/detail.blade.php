@@ -61,33 +61,26 @@
             </div>
 
             <div class="row tickets">
+                @foreach($event_tickets as $ticket)
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
-                            <h5 class="card-title">Thường</h5>
-                            <p class="card-text">200.-</p>
-                            <p class="card-text">&nbsp;</p>
+                            <h5 class="card-title">{{ $ticket->name }}</h5>
+                            <p class="card-text">{{ $ticket->cost}}-</p>
+                            @php
+                                $value = json_decode($ticket->special_validity);
+                            @endphp
+                            @if($value !== null)
+                                @if(isset($value->date))
+                                <p class="card-text">Sắp có đến ngày {{ $value->date }}</p>
+                                @else
+                                <p class="card-text">{{ $value->amount }} vé có sẵn</p>
+                                @endif
+                            @endif
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Đặt sớm</h5>
-                            <p class="card-text">120.-</p>
-                            <p class="card-text">Sẵn có cho đến June 1, 2019</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">VIP</h5>
-                            <p class="card-text">400.-</p>
-                            <p class="card-text">100 vé sẵn có</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
             <!-- Sessions -->
