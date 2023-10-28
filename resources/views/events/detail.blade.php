@@ -67,16 +67,14 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $ticket->name }}</h5>
                             <p class="card-text">{{ $ticket->cost}}-</p>
-                            
-                            @php
-                                $value = json_decode($ticket->special_validity);
-                            @endphp
-                            @if($value !== null)
-                                @if(isset($value->date))
-                                <p class="card-text">Sắp có đến ngày {{ $value->date }}</p>
-                                @else
-                                <p class="card-text">{{ $value->amount }} vé có sẵn</p>
-                                @endif
+
+                            <?php $value = json_decode($ticket->special_validity);?>
+                            @if($value != null)
+                            @if(isset($value->date))
+                            <p class="card-text">Sắp có đến ngày {{ $value->date }}</p>
+                            @else
+                            <p class="card-text">{{ $value->amount }} vé có sẵn</p>
+                            @endif
                             @endif
                         </div>
                     </div>
@@ -110,27 +108,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-nowrap">08:30 - 10:00</td>
-                            <td>Talk</td>
-                            <td><a href="sessions/edit.html">Chủ đạo</a></td>
-                            <td class="text-nowrap">Một người quan trọng</td>
-                            <td class="text-nowrap">Chính / Phòng A</td>
-                        </tr>
-                        <tr>
-                            <td class="text-nowrap">10:15 - 11:00</td>
-                            <td>Talk</td>
-                            <td><a href="sessions/edit.html">X có gì mới?</a></td>
-                            <td class="text-nowrap">Người khác</td>
-                            <td class="text-nowrap">Chính / Phòng A</td>
-                        </tr>
-                        <tr>
-                            <td class="text-nowrap">10:15 - 11:00</td>
-                            <td>Workshop</td>
-                            <td><a href="sessions/edit.html">Thực hành với Y</a></td>
-                            <td class="text-nowrap">Người khác</td>
-                            <td class="text-nowrap">Phụ / Phòng C</td>
-                        </tr>
+                        @foreach($channels as $channel)
+                            @foreach($channel->rooms as $room)
+                                @foreach($room->sessions as $session)
+                                <tr>
+                                    <td class="text-nowrap">{{ date('H:i', strtotime($session->start)) }} - {{ date('H:i', strtotime($session->end))}}</td>
+                                    <td>{{ $session->type }}</td>
+                                    <td><a href="sessions/edit.html">{{ $session->title }} </a></td>
+                                    <td class="text-nowrap">{{ $session->speaker }} </td>
+                                    <td class="text-nowrap">{{ $channel->name }} / {{ $room->name }}</td>
+                                </tr>
+                                @endforeach
+                            @endforeach
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -150,22 +140,23 @@
             </div>
 
             <div class="row channels">
+
+
+                @foreach ($channels as $channel)
+                    <?php $session_count = 0; ?>
+                    @foreach ($channel->rooms as $room)
+                        <?php $session_count += $room->sessions->count(); ?>
+                    @endforeach
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
-                            <h5 class="card-title">Chính</h5>
-                            <p class="card-text">3 Phiên, 1 phòng</p>
+                            <h5 class="card-title"> {{ $channel->name }}</h5>
+                            <p class="card-text"> {{ $session_count }} Phiên, {{ $channel->rooms->count() }} phòng</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Phụ</h5>
-                            <p class="card-text">15 phiên, 2 phòng</p>
-                        </div>
-                    </div>
-                </div>
+                
+                @endforeach
             </div>
 
             <!-- Rooms -->
@@ -191,22 +182,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($channel->rooms as $room)
                         <tr>
-                            <td>Phòng A</td>
-                            <td>1,000</td>
+                            <td> {{ $room->name }}</td>
+                            <td>{{ $room->capacity }}</td>
                         </tr>
-                        <tr>
-                            <td>Phòng B</td>
-                            <td>100</td>
-                        </tr>
-                        <tr>
-                            <td>Phòng C</td>
-                            <td>100</td>
-                        </tr>
-                        <tr>
-                            <td>Phòng D</td>
-                            <td>250</td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

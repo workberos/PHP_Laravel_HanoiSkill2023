@@ -8,8 +8,8 @@ use App\Models\Event_ticket;
 use App\Models\Session;
 use App\Models\Channel;
 use App\Models\Room;
-
-
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
@@ -64,13 +64,16 @@ class EventController extends Controller
       ->with('success', 'Đã tạo sự kiện thành công');
   }
 
+
   //Display the specified resource.
   public function show(Event $event)
   {
-
     $event_tickets = Event_ticket::where('event_id', $event->id)->get();
+    $channels = Channel::where('event_id', $event->id)
+      ->with('rooms')
+      ->get();
 
-    return view('events.detail', compact('event', 'event_tickets'));
+    return view('events.detail', compact('event', 'event_tickets', 'channels'));
   }
 
   //Show the form for editing the specified resource.
@@ -79,7 +82,6 @@ class EventController extends Controller
 
     return view('events.edit', compact('event'));
   }
-
 
   //Update the specified resource in storage.
   public function update(Request $request, Event $event)
