@@ -60,15 +60,19 @@ class EventController extends Controller
       ]
     );
 
-    return redirect()->action([EventController::class, 'show'], ['event' => $newEvent])
-      ->with('success', 'Đã tạo sự kiện thành công');
+    return view('events.index');
   }
 
 
   //Display the specified resource.
   public function show(Event $event)
   {
+    if($event->organizer_id !== session('currentOrganizer')->id){
+      // Nếu không được phép truy cập sẽ trở về trang chủ
+      return redirect()->action([EventController::class, 'index']);
+    }
     $event_tickets = Event_ticket::where('event_id', $event->id)->get();
+
     $channels = Channel::where('event_id', $event->id)
       ->with('rooms')
       ->get();
@@ -96,19 +100,14 @@ class EventController extends Controller
       'date.date_format' => "Ngày không đúng định dạng"
     ];
 
-    $request->validate([
-      'name' => 'required',
-      'slug' => 'required|regex:/^[a-z0-9\-]+$/',
-      'date' => 'required|date_format:Y-m-d',
 
-    ], $message);
+    Event::where('id', $event->id)
+      ->update($request->validate([
+        'name' => 'required',
+        'slug' => 'required|regex:/^[a-z0-9\-]+$/',
+        'date' => 'required|date_format:Y-m-d',
 
-    $updatingEvent = Event::where('id', $event->id)
-      ->update([
-        'name' => $request->name,
-        'slug' => $request->slug,
-        'date' => $request->date,
-      ]);
+      ], $message));
 
     return redirect()->action([EventController::class, 'show'], ['event' => $event])
       ->with('success', 'Cập nhật sự kiện thành công.');

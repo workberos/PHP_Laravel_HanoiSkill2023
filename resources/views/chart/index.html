@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<body>
+
+  <div style="width: 1000px">
+    <canvas id="myChart" style="width:100%; min-width: 600px;"></canvas>
+  </div>
+
+  <script>
+
+    // Tên phiên
+    var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+    //Giá trị cột 1
+    var y1Values = [55, 49, 44, 24, 20, 0];
+    // Giá trị cột 2
+    var y2Values = [1, 78, 12, 20, 90, 0];
+
+    var barColors = [];
+    for (let i = 0; i <= y1Values.length; ++i) {
+      let color = y1Values[i] < y2Values[i] ? '#c3dba4' : '#fca39c';
+      barColors.push(color);
+    }
+
+    var chartData = {
+      labels: xValues,
+      datasets: [{
+        label: "Người tham dự",
+        backgroundColor: barColors,
+        data: y1Values,
+      },
+      {
+        label: "Công xuất",
+        backgroundColor: '#97caf9',
+        data: y2Values,
+      }],
+    };
+    new Chart("myChart", {
+      type: "bar",
+      data: chartData,
+      options: {
+        // Đặt Legend sang bên phải
+        legend: {
+          position: 'right',
+          labels:
+          {
+            color: ['#fca39c', '#97caf9']
+          }
+
+        },
+        scales: {
+          xAxes: [{
+            // Nghiêng chữ từng cột
+            ticks: {
+              minRotation: 45
+            },
+            // Tạo label bên dưới
+            scaleLabel: {
+              display: true,
+              labelString: 'Phiên'
+            }
+          }],
+          yAxes: [{
+            // Ẩn lưới ngang
+            gridLines: {
+              display: false,
+            },
+            // Tạo label bên trái
+            scaleLabel: {
+              display: true,
+              labelString: 'Công xuất',
+            }
+          }],
+        },
+      },
+    });
+  </script>
+
+</body>
+
+</html>
+
+
+<script>
+
+  var y1Values = [55, 49, 44, 24, 20, 0];
+  var y2Values = [1, 78, 12, 20, 90, 0];
+  var sosanh = [];
+  for (let i = 0; i < y1Values.length; i++) {
+    const element = y1Values[i] < y2Values[i];
+    sosanh.push(element);
+  }
+
+
+</script>

@@ -28,4 +28,9 @@ class LoginController extends Controller
         $message = 'Tên đăng nhập hoặc mật khẩu không đúng';
         return view('login.index', ['message' => $message]);
     }
+
+    public function logout() {
+        session()->forget('currentOrganizer');
+        return view('login.index');
+    }
 }
