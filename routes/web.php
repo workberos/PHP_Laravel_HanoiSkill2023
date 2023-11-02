@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TicketController;
 
 /*
@@ -25,8 +26,12 @@ Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
 Route::resource('events', EventController::class);
 
 // route ticket
-Route::get('/ticket/create/{event}', [TicketController::class, 'create'])->name('tickets.create');
-Route::post('/ticket/store/{event}', [TicketController::class, 'store'])->name('tickets.store');
+Route::get('event/{event}/ticket/create/', [TicketController::class, 'create'])->name('ticket.create');
+Route::post('event/{event}/ticket/store/', [TicketController::class, 'store'])->name('ticket.store');
+
+// route session
+Route::get('event/{event}/session/create/', [SessionController::class, 'create'])->name('session.create');
+Route::post('event/{event}/session/store/', [SessionController::class, 'store'])->name('session.store');
 
 
 

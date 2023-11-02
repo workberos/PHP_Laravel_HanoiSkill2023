@@ -11,7 +11,6 @@ class TicketController extends Controller
 {
     public function Create(Event $event)
     {
-        echo $event;
         return view('tickets.create', compact('event'));
     }
 

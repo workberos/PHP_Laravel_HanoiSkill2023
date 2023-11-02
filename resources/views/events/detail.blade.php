@@ -31,7 +31,7 @@
           <h2 class="h4">Vé</h2>
           <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-              <a href="{{ route('tickets.create', ['event' => $event]) }}" class="btn btn-sm btn-outline-secondary">
+              <a href="{{ route('ticket.create', ['event' => $event]) }}" class="btn btn-sm btn-outline-secondary">
                 Tạo vé mới
               </a>
             </div>
@@ -67,7 +67,8 @@
           <h2 class="h4">Phiên</h2>
           <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-              <a href="sessions/create.html" class="btn btn-sm btn-outline-secondary">
+              
+              <a href="{{ route('session.create', ['event' => $event]) }}" class="btn btn-sm btn-outline-secondary">
                 Tạo phiên mới
               </a>
             </div>

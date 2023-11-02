@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Session extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = ['type', 'title', 'speaker', 'room_id', 'start', 'end', 'description'];
+
 }

@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <form class="needs-validation" action="{{ route('tickets.store',['event' => $event]) }}" method="post">
+    <form class="needs-validation" action="{{ route('ticket.store',['event' => $event]) }}" method="post">
         @csrf
         <div class="row">
             <div class="col-12 col-lg-4 mb-3">
@@ -84,7 +84,8 @@
         <div class="row">
             <div class="col-12 col-lg-4 mb-3">
                 <label for="inputAmount">Số lượng vé tối đa được bán</label>
-                <input type="number" class="form-control @error('amount') is-invalid @enderror" id="inputAmount" name="amount" placeholder="" value="{{ old('amount') }}">
+                <input type="number" class="form-control @error('amount') is-invalid @enderror" id="inputAmount" 
+                name="amount" placeholder="" value="{{ old('amount') }}">
                 @error('amount')
                 <div class="invalid-feedback">
                     {{$message}}
