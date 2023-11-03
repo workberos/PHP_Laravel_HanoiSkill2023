@@ -33,7 +33,6 @@ class SessionController extends Controller
             'end.required' => 'Thời gian kết thúc được để trống',
             'start.date_format' => "Ngày không đúng định dạng",
             'end.date_format' => "Ngày không đúng định dạng",
-
             'description' => 'Mô tả không được để trống',
         ];
 
