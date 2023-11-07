@@ -33,7 +33,7 @@ Route::post('event/{event}/ticket/store/', [TicketController::class, 'store'])->
 Route::get('event/{event}/session/create/', [SessionController::class, 'create'])->name('session.create');
 Route::post('event/{event}/session/store/', [SessionController::class, 'store'])->name('session.store');
 Route::get('event/{event}/session/{session}/edit/', [SessionController::class, 'edit'])->name('session.edit');
-Route::post('event/{event}/session/{session}/update/', [SessionController::class, 'update'])->name('session.update');
+Route::put('event/{event}/session/{session}/update/', [SessionController::class, 'update'])->name('session.update');
 
 
 

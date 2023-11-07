@@ -43,6 +43,7 @@
 
             <form class="needs-validation" action="{{ route('session.update', ['event'=>$event, 'session' => $session]) }}" method="post">
             @csrf
+            @method('PUT')
                 <div class="row">
                     <div class="col-12 col-lg-4 mb-3">
                         <label for="selectType">Loại</label>
