@@ -144,7 +144,7 @@
           <h2 class="h4">Phòng</h2>
           <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-              <a href="rooms/create.html" class="btn btn-sm btn-outline-secondary">
+              <a href="{{ route('room.create', ['event' => $event]) }}" class="btn btn-sm btn-outline-secondary">
                 Tạo phòng mới
               </a>
             </div>

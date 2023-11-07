@@ -1,31 +1,6 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+@extends('layout.main')
 
-    <title>Event Backend</title>
-
-    <base href="../">
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!-- Custom styles -->
-    <link href="assets/css/custom.css" rel="stylesheet">
-</head>
-
-<body>
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="events/index.html">Nền tảng sự kiện</a>
-    <span class="navbar-organizer w-100">{tên tổ chức}</span>
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" id="logout" href="index.html">Đăng xuất</a>
-        </li>
-    </ul>
-</nav>
-
+@section('content')
 <div class="container-fluid">
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
@@ -35,7 +10,7 @@
                 </ul>
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>{tên sự kiện}</span>
+                    <span>{{ $event->name }}</span>
                 </h6>
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link active" href="events/detail.html">Tổng quan</a></li>
@@ -53,9 +28,9 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="border-bottom mb-3 pt-3 pb-2">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
-                    <h1 class="h2">{chèn tên sự kiện}</h1>
+                    <h1 class="h2">{{ $event->name }}</h1>
                 </div>
-                <span class="h6">{chèn ngày sự kiện}</span>
+                <span class="h6">{{ $event->date }}</span>
             </div>
 
             <div class="mb-3 pt-3 pb-2">
@@ -64,15 +39,15 @@
                 </div>
             </div>
 
-            <form class="needs-validation" novalidate action="events/detail.html">
-
+            <form class="needs-validation" action="{{ route('room.store', ['event' => $event]) }}" method="post">
+            @csrf
                 <div class="row">
                     <div class="col-12 col-lg-4 mb-3">
                         <label for="inputName">Tên</label>
                         <!-- adding the class is-invalid to the input, shows the invalid feedback below -->
-                        <input type="text" class="form-control is-invalid" id="inputName" name="name" placeholder="" value="">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="inputName" name="name"value="{{ old('name') }}">
                         <div class="invalid-feedback">
-                            Tên không được để trống.
+                            Tên phòng không được để trống.
                         </div>
                     </div>
                 </div>
@@ -81,8 +56,12 @@
                     <div class="col-12 col-lg-4 mb-3">
                         <label for="selectChannel">Kênh</label>
                         <select class="form-control" id="selectChannel" name="channel">
-                            <option value="1">Chính</option>
-                            <option value="2">Phụ</option>
+                            @foreach($channels as $channel)
+                                <option value="{{ $channel->id}}" 
+                                {{ old('channel') == $channel->id? 'selected' : ''}}>
+                                    {{ $channel->name}}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -90,7 +69,11 @@
                 <div class="row">
                     <div class="col-12 col-lg-4 mb-3">
                         <label for="inputCapacity">Công suất</label>
-                        <input type="number" class="form-control" id="inputCapacity" name="capacity" placeholder="" value="">
+                        <input type="number" class="form-control @error('capacity') is-invalid @enderror" id="inputCapacity" 
+                        name="capacity" placeholder="" value="{{ old('capacity')? old('capacity') : null }}">
+                        <div class="invalid-feedback">
+                            Công xuất phòng không được để trống.
+                        </div>
                     </div>
                 </div>
 
@@ -102,6 +85,4 @@
         </main>
     </div>
 </div>
-
-</body>
-</html>
+@endsection
