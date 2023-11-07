@@ -94,7 +94,7 @@
             <tr>
               <td class="text-nowrap">{{ date('H:i', strtotime($session->start)) }} - {{ date('H:i', strtotime($session->end))}}</td>
               <td>{{ $session->type }}</td>
-              <td><a href="sessions/edit.html">{{ $session->title }} </a></td>
+              <td><a href="{{ route('session.edit', ['session'=> $session, 'event' => $event]) }}">{{ $session->title }} </a></td>
               <td class="text-nowrap">{{ $session->speaker }} </td>
               <td class="text-nowrap">{{ $channel->name }} / {{ $room->name }}</td>
             </tr>
