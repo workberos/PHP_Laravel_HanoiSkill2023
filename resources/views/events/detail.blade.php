@@ -9,7 +9,26 @@
 
 @section('content')
 <div class="container-fluid">
+  <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link active" href="{{ route('events.index') }}">Quản lý sự kiện</a></li>
+      </ul>
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>{{ $event->name }}</span>
+      </h6>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link active" href="{{ route('events.index') }}">Tổng quan</a></li>
+      </ul>
 
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>Báo cáo</span>
+      </h6>
+      <ul class="nav flex-column mb-2">
+        <li class="nav-item"><a class="nav-link" href="reports/index.html">Công suất phòng</a></li>
+      </ul>
+    </div>
+  </nav>
   <div class="row">
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -67,7 +86,7 @@
           <h2 class="h4">Phiên</h2>
           <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-              
+
               <a href="{{ route('session.create', ['event' => $event]) }}" class="btn btn-sm btn-outline-secondary">
                 Tạo phiên mới
               </a>
@@ -161,7 +180,7 @@
             </tr>
           </thead>
           <tbody>
-          @if(isset($channel))
+            @if(isset($channel))
             @foreach($channel->rooms as $room)
             <tr>
               <td> {{ $room->name }}</td>

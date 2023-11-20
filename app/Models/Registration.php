@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Channel extends Model
+class Registration extends Model
 {
     use HasFactory;
-    public function rooms()
-    {
-        return $this->hasMany(Room::class, 'channel_id', 'id');
-    }
+    public $timestamps = false;
+    protected $fillable = ['attendee_id', 'ticket_id', 'registration_time'];
 }

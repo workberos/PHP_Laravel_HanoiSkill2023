@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EventController;
@@ -39,6 +40,21 @@ Route::put('event/{event}/session/{session}/update/', [SessionController::class,
 // route room
 Route::get('event/{event}/room/create/', [RoomController::class, 'create'])->name('room.create');
 Route::post('event/{event}/room/store/', [RoomController::class, 'store'])->name('room.store');
+
+
+// route report
+Route::get('event/{event}/report/', [RoomController::class, 'store'])->name('room.store');
+
+
+Route::get('/api/v1/events', [ApiController::class, 'getEvents']);
+Route::get('/api/v1/organizers/{organizer_slug}/events/{event_slug}', [ApiController::class, 'getEventDetails']);
+Route::post('/api/v1/login', [ApiController::class, 'login']);
+Route::post('/api/v1/logout', [ApiController::class, 'logout']);
+Route::post('/api/v1/organizers/{organizerSlug}/events/{eventSlug}/registration', [ApiController::class, 'registration']);
+Route::post('/api/v1/registrations', [ApiController::class, 'registrationList']);
+
+
+
 
 
 

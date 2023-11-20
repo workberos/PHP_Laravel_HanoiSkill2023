@@ -7,7 +7,6 @@
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link active" href="{{ route('events.index') }}">Quản lý sự kiện</a></li>
                 </ul>
-            </div>
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">

@@ -16,7 +16,7 @@
                 <h1 class="h2">Quản lý sự kiện</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <a href="{{ route('events.create') }}" class="btn btn-sm btn-outline-secondary">Tạo sự kiện mới</a>
+                        <a href="{{ route('events.create'),  }}" class="btn btn-sm btn-outline-secondary">Tạo sự kiện mới</a>
                     </div>
                 </div>
             </div>
