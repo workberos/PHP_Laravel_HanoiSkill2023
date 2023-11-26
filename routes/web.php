@@ -47,10 +47,10 @@ Route::get('event/{event}/report/', [RoomController::class, 'store'])->name('roo
 
 
 Route::get('/api/v1/events', [ApiController::class, 'getEvents']);
-Route::get('/api/v1/organizers/{organizer_slug}/events/{event_slug}', [ApiController::class, 'getEventDetails']);
+Route::get('/api/v1/organizer/{organizer_slug}/event/{event_slug}', [ApiController::class, 'getEventDetails']);
 Route::post('/api/v1/login', [ApiController::class, 'login']);
 Route::post('/api/v1/logout', [ApiController::class, 'logout']);
-Route::post('/api/v1/organizers/{organizerSlug}/events/{eventSlug}/registration', [ApiController::class, 'registration']);
+Route::post('/api/v1/organizer/{organizer_slug}/event/{event_slug}/registration', [ApiController::class, 'registration']);
 Route::post('/api/v1/registrations', [ApiController::class, 'registrationList']);
 
 

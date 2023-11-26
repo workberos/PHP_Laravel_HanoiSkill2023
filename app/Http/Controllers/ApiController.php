@@ -116,7 +116,7 @@ class ApiController extends Controller
 
 
     // C4:
-    public function registration(Request $request, $organizerSlug, $eventSlug) {
+    public function registration(Request $request, $organizer_slug, $event_slug) {
 
         $attendee = attendee::where('login_token', $request->token)->first();
         if(!$attendee) {

@@ -180,14 +180,14 @@
             </tr>
           </thead>
           <tbody>
-            @if(isset($channel))
+          @foreach($channels as $channel)
             @foreach($channel->rooms as $room)
             <tr>
               <td> {{ $room->name }}</td>
               <td>{{ $room->capacity }}</td>
             </tr>
             @endforeach
-            @endif
+            @endforeach
           </tbody>
         </table>
       </div>

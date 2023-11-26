@@ -9,8 +9,8 @@
 
     <title>Event Backend</title>
 
-    <!-- <base href="../"> -->
-    <base href="/module_b2/public/">
+    <base href="../">
+    <!-- <base href="/module_b/public"> -->
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <!-- Custom styles -->
